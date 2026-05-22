@@ -1,2 +1,12 @@
-# toolblocs
-Command line tools for installing and maintaining Linux, compatible with Ubuntu 22.04LTS, 24.04LTS, 26.04LTS, Debian 12 and Debian 13 on the cli
+# Concera Toolbox
+
+# Why toolbox?
+A set of command line tools, libraries and installers we created to manage, update and install servers in a more rappid and easy way. Tools that can be used by less experienced users and in compbination can install applications in any way.
+
+## Compatibility
+We tested this scripts and tools on with:
+- Debian 13
+- Debian 12
+- Ubuntu 26.04LTS
+- Ubuntu 24.04LTS
+- Ubuntu 22.04LTS
