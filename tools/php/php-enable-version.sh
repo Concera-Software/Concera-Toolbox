@@ -1,18 +1,19 @@
 #!/bin/bash
-#      ___        _ _      _      ___ _  _ ___  __   __          _          
-#     / __|_ __ _(_) |_ __| |_   | _ \ || | _ \ \ \ / /__ _ _ __(_)___ _ _  
-#     \__ \ V  V / |  _/ _| ' \  |  _/ __ |  _/  \ V / -_) '_(_-< / _ \ ' \ 
-#     |___/\_/\_/|_|\__\__|_||_| |_| |_||_|_|     \_/\___|_| /__/_\___/_||_|
+#   ___ ___  _  _  ___ ___ ___    _     _____ ___   ___  _    ___  _____  __
+#  / __/ _ \| \| |/ __| __| _ \  /_\   |_   _/ _ \ / _ \| |  | _ )/ _ \ \/ /
+# | (_| (_) | .` | (__| _||   / / _ \    | || (_) | (_) | |__| _ \ (_) >  <
+#  \___\___/|_|\_|\___|___|_|_\/_/ \_\   |_| \___/ \___/|____|___/\___/_/\_\
 #
-# --------------------------------------------------------------------------------------------------
-# @author(s)		S.vanBuren, Google Gemini 3.5 Flash
-# @copyright 		Concera Software - © 2015-2026 - https://concera.software/
-# @dateCreated		2026-05-20
-# @lastChange		2026-05-22
-# @version		0.0.1
-# --------------------------------------------------------------------------------------------------
+# https://github.com/Concera-Software/Concera-Toolbox
 #
-# -- DESCRIPTION:
+# Set of general bash functions for use in Bash scripts
+#
+# Version : v1.0.2
+# Author  : S. van Buren
+# Date    : 2026-05-22
+#
+# ----------------------------------------------------------------------------------------------------------------
+# DESCRIPTION:
 #
 # This file can be used to change/switch between installed PHP versions on a system (tested on
 # Debian 12). This script supports targeting the CLI  environment, the Apache web server web engine,
