@@ -18,11 +18,11 @@ We tested this scripts and tools on with:
 Older editions of Linux that the tools ware initially used on but are no longer maintained.
 - Ubuntu 22.04LTS (not prefferred)
 
-# UNITY
+# Uniform implementation
 
 To preserve the unity of very script and library file we need to commit to some standards:
 
-# HEADER
+## HEADER
 
 Every file has an header with the following content:
 
@@ -98,3 +98,12 @@ Every file has an header with the following content:
 #
 ```
 
+## LIBRARY FILES
+
+Library files are stored in the /libs folder of the toolbox and seperated by "language" like bash, sh, php and 
+phython. Every language has it's own folder. 
+
+### BASH
+
+Library files have a number of mandatory implementation requirements, whe using the include functions from the
+core library like in
