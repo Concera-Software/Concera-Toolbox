@@ -27,12 +27,12 @@ To preserve the unity of very script and library file we need to commit to some 
 Every file has an header with the following content:
 
 ```
-#  ___   _   ___ _  _ _    ___ ___   _                   _
-# | _ ) /_\ / __| || | |  |_ _| _ ) | |   ___  __ _ __ _(_)_ _  __ _
-# | _ \/ _ \\__ \ __ | |__ | || _ \ | |__/ _ \/ _` / _` | | ' \/ _` |
-# |___/_/ \_\___/_||_|____|___|___/ |____\___/\__, \__, |_|_||_\__, |
-#                                             |___/|___/       |___/
-# Created by Concera.
+#   ___ ___  _  _  ___ ___ ___    _     _____ ___   ___  _    ___  _____  __
+#  / __/ _ \| \| |/ __| __| _ \  /_\   |_   _/ _ \ / _ \| |  | _ )/ _ \ \/ /
+# | (_| (_) | .` | (__| _||   / / _ \    | || (_) | (_) | |__| _ \ (_) >  <
+#  \___\___/|_|\_|\___|___|_|_\/_/ \_\   |_| \___/ \___/|____|___/\___/_/\_\
+#
+# https://github.com/Concera-Software/Concera-Toolbox
 #
 #
 # Set of general bash functions for use in Bash scripts
@@ -72,7 +72,7 @@ Every file has an header with the following content:
 # Globel (.env) variables. The env variables with the asterisk are mandatory to create before using the library
 # IF needed, env_ variables are added (created), if they don't exist , to the GLOBAL scope.
 #
-# env_LOG_LEVEL_DEBUG
+# env_LOG_LEVEL_CONSOLE
 # env_LOG_LEVEL_DEBUG
 # env_LOG_LEVEL_SYSLOG
 # env_LOG_LEVEL_FILE
@@ -107,3 +107,28 @@ phython. Every language has it's own folder.
 
 Library files have a number of mandatory implementation requirements, whe using the include functions from the
 core library like in
+
+#### Use the LIB_REGISTER Array
+Include registration for inclusion and dependencies. The LIB_REGISTER files is used by the toolbox-core library
+file that handles loading libraries using core::load_library() for a single library file and and core::load_libraries()
+for a library folder. By checking the LIB_REGISTER double inclusions are prevented and dependencies can be 
+included automaticly or mually by calling core::load_dependencies()
+
+if the library does not add its own library to the array, loading the library is assumed to be failed.
+
+for every library two key's are created under it's own name: 
+
+::version	string
+::dependencies	array
+
+```
+# append file to LIB_REGISTER
+if ! declare -p LIB_REGISTER >/dev/null 2>&1; then declare -gA LIB_REGISTER; fi
+LIB_REGISTER["bashlib-logging.sh:version"]="v1.0.0"
+
+# register dependencies of libraries in the toolbox. Multiple dependencies need to be space seperated.
+LIB_REGISTER["bashlib-logging.sh:dependencies"]="bashlib-core.sh"
+)
+```
+
+#### Use a 
