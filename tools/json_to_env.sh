@@ -54,9 +54,14 @@ JSON_FILE=""
 
 # create default output file.
 OUTPUT_FILE=""
+OUTPUT_PARM=0
+UNKNOWN_OPTION=0
+SILENT=0
 
 # Function that prints help information.
 show_help() {
+  if (( SILENT )); then return 0; fi
+
   cat <<EOF
 Usage:
   $SCRIPT_NAME [OPTIONS] JSON_FILE
@@ -66,12 +71,16 @@ Convert a simple JSON object to a bash-style .env file.
 Options:
   -h, --help            Show this help message and exit.
   --autoinstall         Automatically install required tools.
+  --silent		Suppress all output, also output of the configfile. If the --file option
+			is not used, default file .env will be used to output the data.
   --file OUTPUT_FILE    Write output to a file instead of the console.
 
 Examples:
   $SCRIPT_NAME config.json
   $SCRIPT_NAME config.json --file .env
   $SCRIPT_NAME --autoinstall config.json --file .env
+  $SCRIPT_NAME --autoinstall config.json --file .env --silent
+
 EOF
 }
 
@@ -89,20 +98,23 @@ while [[ $# -gt 0 ]]; do
       ;;
 
     --file)
-      # The next argument must be the output filename.
-      if [[ -z "${2:-}" ]]; then
-        echo "$TIMESTAMP [EROR] --file requires an output filename" >&2
-        exit 1
+      OUTPUT_PARM=1
+      if [[ -n "${2:-}" && "${2:0:2}" != "--" ]]; then
+         OUTPUT_FILE="$2"
+         shift
       fi
+      shift
+      ;;
 
-      OUTPUT_FILE="$2"
-      shift 2
+    --silent)
+      SILENT=1
+      AUTO_INSTALL=1
+      shift
       ;;
 
     -*)
-      echo "$TIMESTAMP [EROR] unknown option: $1" >&2
-      show_help
-      exit 1
+      UNKNOWN_OPTION="$1"
+      shift
       ;;
 
     *)
@@ -113,15 +125,41 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+if [[ ! -n "${UNKNOWN_OPTION}" ]]; then
+   if (( ! SILENT )); then
+      echo "$TIMESTAMP [EROR] unknown option ${UNKNOWN_OPTION}" >&2
+      show_help
+      exit 0
+   fi
+fi
+
+if (( SILENT )); then
+   if [[ ! -n "${OUTPUT_FILE}" ]]; then
+      OUTPUT_FILE=".env"
+   fi
+fi
+
+if (( OUTPUT_PARM )); then
+  if [[ ! -n "${OUTPUT_FILE}" ]]; then
+    if (( ! SILENT )); then
+       echo "$TIMESTAMP [EROR] --file requires an output filename, parameter ignored" >&2
+    fi
+  fi
+fi
+
 # A JSON file is required.
 if [[ -z "$JSON_FILE" ]]; then
-  show_help
+  if (( ! SILENT )); then
+     show_help
+  fi
   exit 1
 fi
 
 # Check if the JSON file exists.
 if [[ ! -f "$JSON_FILE" ]]; then
-  echo "$TIMESTAMP [EROR] file not found: $JSON_FILE" >&2
+  if (( ! SILENT )); then
+     echo "$TIMESTAMP [EROR] file not found: $JSON_FILE" >&2
+  fi
   exit 1
 fi
 
@@ -140,7 +178,9 @@ if ! command -v jq >/dev/null 2>&1; then
         sudo apt install -y jq
         ;;
       *)
-        echo "$TIMESTAMP [EROR] jq is required. Please install it and try again." >&2
+        if (( ! SILENT )); then
+	        echo "$TIMESTAMP [EROR] jq is required. Please install it and try again." >&2
+        fi
         exit 1
         ;;
     esac
@@ -164,7 +204,15 @@ ENV_OUTPUT="$(
 # Otherwise, print to the console.
 if [[ -n "$OUTPUT_FILE" ]]; then
   printf '%s\n' "$ENV_OUTPUT" > "$OUTPUT_FILE"
-  echo "$TIMESTAMP [SUCS] written output to: $OUTPUT_FILE"
+
+  if (( ! SILENT )); then
+     echo "$TIMESTAMP [SUCS] written output to: $OUTPUT_FILE"
+  fi
+
 else
-  printf '%s\n' "$ENV_OUTPUT"
+
+  if (( ! SILENT )); then
+    printf '%s\n' "$ENV_OUTPUT"
+  fi
+
 fi
