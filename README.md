@@ -131,4 +131,48 @@ LIB_REGISTER["bashlib-logging.sh:dependencies"]="bashlib-core.sh"
 )
 ```
 
-#### Use a 
+#### Append required environmental variables with default values if they don't exist
+
+Libraries can use global configuration variables. These variables start with env_ pointing to the fact
+they are set in the normal .env configuration file for scripts. These .env files are common for bash
+bashed scripts.
+
+```
+# Initiate maximul level of debug message. Add this ENV variable
+# to the global .env file to use it as a globel setting. The debug level is
+# applicable for all logging, console, file and console. To limit the
+# use the levels wisely to craete the optimal loglevel for each option.
+#
+if [[ ! -v env_LOG_LEVEL_DEBUG ]]; then declare -g env_LOG_LEVEL_DEBUG=0; fi
+
+# Initiate maximul level of message written to console. Add this ENV variable
+# to the global .env file to use it as a globel setting.
+#
+if [[ ! -v env_LOG_LEVEL_CONSOLE ]]; then declare -g env_LOG_LEVEL_CONSOLE=999; fi
+
+# Initiate maximul level of message written to syslog. Add this ENV variable
+# to the global .env file to use it as a globel setting.
+#
+if [[ ! -v env_LOG_LEVEL_SYSLOG ]]; then declare -g env_LOG_LEVEL_SYSLOG=999; fi
+
+# Initiate maximul level of message written to a logfile. Add this ENV variable
+# to the global .env file to use it as a globel setting.
+#
+if [[ ! -v env_LOG_LEVEL_FILE ]]; then declare -g env_LOG_LEVEL_FILE=999; fi
+
+# Initiate the logfile used to log to. Add this ENV variable
+# to the global .env file to use it as a globel setting.
+#
+if [[ ! -v env_LOG_FILE ]]; then declare -g env_LOG_FILE="/var/log/bashlib.log"; fi
+
+if [[ ! -v env_LOG_TYPE_CRIT_COLOR ]]; then declare -g env_LOG_TYPE_CRIT_COLOR='\033[1;37;41m'; fi
+if [[ ! -v env_LOG_TYPE_EROR_COLOR ]]; then declare -g env_LOG_TYPE_EROR_COLOR='\033[0;31m'; fi
+if [[ ! -v env_LOG_TYPE_WARN_COLOR ]]; then declare -g env_LOG_TYPE_WARN_COLOR='\033[1;33m'; fi
+if [[ ! -v env_LOG_TYPE_INFO_COLOR ]]; then declare -g env_LOG_TYPE_INFO_COLOR='\033[0;90m'; fi
+if [[ ! -v env_LOG_TYPE_NOTC_COLOR ]]; then declare -g env_LOG_TYPE_NOTC_COLOR='\033[1;37m'; fi
+if [[ ! -v env_LOG_TYPE_DEBG_COLOR ]]; then declare -g env_LOG_TYPE_DEBG_COLOR='\033[1;37m'; fi
+if [[ ! -v env_LOG_TYPE_UNKN_COLOR ]]; then declare -g env_LOG_TYPE_UNKN_COLOR='\033[1;37m'; fi
+if [[ ! -v env_LOG_TYPE_SUCS_COLOR ]]; then declare -g env_LOG_TYPE_SUCS_COLOR='\033[1;37m'; fi
+if [[ ! -v env_COLOR_RESET ]]; then declare -g env_COLOR_RESET='\033[1;37m'; fi
+```
+
