@@ -6,7 +6,8 @@
 #
 # https://github.com/Concera-Software/Concera-Toolbox
 #
-# Set of general bash functions for use in Bash scripts
+# PHP switch version for CLI or APACHE
+# ----------------------------------------------------------------------------------------------------------------
 #
 # Version : v1.0.2
 # Author  : S. van Buren

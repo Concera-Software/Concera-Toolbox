@@ -8,12 +8,15 @@
 # Toolbox CORE bash library
 # ---------------------------------------------------------------------------------------
 #
-# Set of general core functions for working with the bash library such as include libs,
-# check dependencies and incluse a complete folder of libs.
-#
 # Version : v1.0.0-rc1
 # Author  : André Hagoort
 # Date    : 2026-05-20
+#
+# ---------------------------------------------------------------------------------------
+# Description
+#
+# Set of general core functions for working with the bash library such as include libs,
+# check dependencies and incluse a complete folder of libs.
 #
 # ---------------------------------------------------------------------------------------
 # Function List
@@ -24,8 +27,11 @@
 #
 # ---------------------------------------------------------------------------------------
 # Changelog / History :
+#
 # 2026-05-19 | AH  | v1.0.0-rc01 | First Release Candate
 #
+#
+# ---------------------------------------------------------------------------------------
 
 # append file to LIB_REGISTER
 if ! declare -p LIB_REGISTER >/dev/null 2>&1; then declare -gA LIB_REGISTER; fi

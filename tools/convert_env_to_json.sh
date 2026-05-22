@@ -126,7 +126,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # 
-if [[ -n "${UNKNOWN_OPTION}" ]; then
+if [[ -n "${UNKNOWN_OPTION}" ]]; then
    if (( ! SILENT )); then
       echo "$TIMESTAMP [EROR] unknown option: $1" >&2
       show_help

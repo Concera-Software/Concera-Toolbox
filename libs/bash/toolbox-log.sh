@@ -5,11 +5,19 @@
 #
 # https://github.com/Concera-Software/Concera-Toolbox
 #
-# Set of general bash functions for use in Bash scripts
+# Library for Logging functions
+#
+# ----------------------------------------------------------------------------------------------------------------
 #
 # Version : v1.0.2
 # Author  : André Hagoort
-# Date    : 2026-05-19T20:48
+# Date    : 2026-05-22
+#
+# ----------------------------------------------------------------------------------------------------------------
+# Description
+#
+# Set of functions to facillitate stadardized logging to console, file and syslog for use withing bash scripts
+# Library is compatible with the load_libraries and load_library function in the toolbox-core.sh library.
 #
 # ----------------------------------------------------------------------------------------------------------------
 # Function List
@@ -50,9 +58,11 @@
 # env_PROCESS_NAME
 #
 # ----------------------------------------------------------------------------------------------------------------
-# Changelog / History :
-# 2026-05-20 | AH | v1.0.2      | Added colors to console messages.
-# 2026-05-20 | AH | v1.0.1      | Fixed an issue with message levels preventing messages to be handled correctly.
+# Changelog / History
+#
+# 2026-05-22 | AH  | v1.0.3      | Fixed minor documenting errors
+# 2026-05-20 | AH  | v1.0.2      | Added colors to console messages.
+# 2026-05-20 | AH  | v1.0.1      | Fixed an issue with message levels preventing messages to be handled correctly.
 # 2026-05-20 | AH | v1.0.0      | Finalized and documented first version
 # 2026-05-19 | AH | v1.0.0-rc01 | First Release Candate
 #
