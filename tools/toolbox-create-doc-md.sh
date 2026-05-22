@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SOURCE_DIR="${1:-.}"
-OUTPUT_FILE="${2:-bashdoc.md}"
+OUTPUT_FILE="${2:-README.md}"
 
 TMP_JSON="$(mktemp)"
 trap 'rm -f "$TMP_JSON"' EXIT
